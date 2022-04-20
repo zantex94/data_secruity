@@ -1,0 +1,26 @@
+extends layout.pug 
+
+block content
+    .pageStructure
+        .exerciseDiv
+            h2 40.5.3. Assignment Security DS.1.2 - One Time Pads
+            p Do Create a program that is capable of creating a number of one time pads as text files. I would be useful if the length of each file and the number of files are parameters for the program. The content of the pads must, of course, be a totally random sequence of bytes. 
+            p When the above is done and tested, create 5 one time pads of length 200 bytes. 
+            p Modelled on Example 40.3 create a program reads both the plaintext, and the key from files, and then produces an output file containing the ciphertext of the encrypted plaintext. 
+            p When that is done and tested. Encrypt a text, less than 200 bytes, with the first of the five one time pads. Hand in the 5 pads, and the file with the cryptotext. Our feedback will be encrypted with the second pad.
+            div 
+                p Plaintext:
+                textarea(id="plaintext" style="height: 71px; width: 253px" name="plantext" placeholder="Put in plaintext to encrypt")
+            div
+                label Key: 
+                input(type="number" min="1" max="26" value="1")
+            br    
+            div
+                button(id="submit_encryption") Encrypt
+            div 
+                p Plaintext:
+                textarea(id="encrypted_value" style="height: 71px; width: 253px" name="encrypted_value" placeholder="Ecrypted text is placed here")
+            div
+                button(id="submit_decryption") Decrypt                 
+    footer
+        p &copy; René Seebach, 2022

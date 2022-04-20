@@ -11,11 +11,8 @@ router.get("/", function (req, res, next) {
 router.get("/forside", function (req, res, next) {
   res.render("forside", { title: "Forside" });
 });
-router.get("/vigenere_Cipher", function (req, res, next) {
-  res.render("vigenére_Cipher", { title: "Vigenére Cipher"});
-});
-router.get("/caesar_Cipher", function (req, res, next) {
-  res.render("caesar_Cipher", { title: "Caesar Cipher"});
+router.get("/one_time_Pad", function (req, res, next) {
+  res.render("one_time_Pads", { title: "One time pad"});
 });
 
 module.exports = router;
