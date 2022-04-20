@@ -28,8 +28,8 @@ console.log(`${keyread}`);
 
   let plaintext = plainread;
   let key1 = keyread;
-  let f = await importmodule.xorString(key1);                  // get generator function built on key
-  let o = await f(plaintext);                          // run it with plaintext
+  let f = importmodule.xorString(key1);                  // get generator function built on key
+  let o = f(plaintext);                          // run it with plaintext
   let cipertext = '';                            // get crypto values byte by byte
   while (true) {
     let y = o.next();
@@ -40,8 +40,8 @@ console.log(`${keyread}`);
   }
   console.log(`DART\nplain: '${plaintext}', length: ${plaintext.length}, crypto: '${cipertext}', length: ${cipertext.length}`);   // unprintables in cipertext
 
-  f = await importmodule.xorString(key1);               // build generator function on key
-  o = await f(cipertext);                              // run it with cryptotext
+  f = importmodule.xorString(key1);               // build generator function on key
+  o = f(cipertext);                              // run it with cryptotext
   let plaintextoutcome = '';
   while (true) {
     let y = o.next();
@@ -50,7 +50,7 @@ console.log(`${keyread}`);
     }
    plaintextoutcome += y.value;
   }
-console.log(`DART\ncrypto: '${cipertext}', length: ${cipertext.length}, plain: '$ plaintextoutcome}', length: $ plaintextoutcome.length}`);   // unprintables in cipertext
+console.log(`DART\ncrypto: '${cipertext}', length: ${cipertext.length}, plain: '${plaintextoutcome}', length: ${plaintextoutcome.length}`);   // unprintables in cipertext
 }
 
 
