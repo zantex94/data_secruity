@@ -4,7 +4,7 @@
 let characters ='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 
 
-function createKeys (length) {
+export function createKeys (length) {
     let result = '';
     let charactersLength = characters.length;
     for (let i = 0; i < length; i++ ) {
