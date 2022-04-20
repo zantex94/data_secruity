@@ -1,58 +1,59 @@
 "use strict";
-import {createKeys} from './keys.js'
+let importmodule = require('./keys.js');
 let fs = require('fs');
-let filename = process.argv[2];
 
-let key = createKeys(200);
-
-fs.writeFile(filename, key , (err) => {
-    if (err) {
-        throw err;
-    }
-    console.log("yes! File is written");
-});
-
-function xorString(init) {
-  const initArr = Array.from(init);
-  const initLength = initArr.length;
-  return function* (input) {
-      let idx = 0;
-      for (const ch of input) {
-          yield initLength === 0 ? ch : String.fromCharCode(ch.charCodeAt(0) ^ initArr[(idx++) % initLength].charCodeAt(0));
-      }
-  }
-}
+one_time_pads();
 
 /*
-* testing
+* testing function for one.
 */
-// let p1 = 'abC';
-// let k1 = 'e1x';
-// let f = xorString(k1);                  // get generator function built on key
-// let o = f(p1);                          // run it with plaintext
-// let c1 = '';                            // get crypto values byte by byte
-// while (true) {
-//   let y = o.next();
-//   if (y.done) {
-//       break;
-//   }
-//   c1 += y.value;
-// }
-// console.log(`DART\nplain: '${p1}', length: ${p1.length}, crypto: '${c1}', length: ${c1.length}`);   // unprintables in c1
+async function one_time_pads(){
+  let filename_key = "../keys/key1.txt";
+  let filename_plaintext = "../data/plaintext1.txt";
 
-// f = xorString(k1);                      // build generator function on key
-// o = f(c1);                              // run it with cryptotext
-// let p11 = '';
-// while (true) {
-//   let y = o.next();
-//   if (y.done) {
-//       break;
-//   }
-//   p11 += y.value;
-// }
-// console.log(`DART\ncrypto: '${c1}', length: ${c1.length}, plain: '${p11}', length: ${p11.length}`);   // unprintables in c1
+  let key = await importmodule.createKeys(200);
+    console.log(key);
 
-export const $ = function (bar) {
-  return document.getElementById(bar);
-};
+  fs.writeFileSync(filename_key,key);
+  // console.log(`${writesync}`);
+
+
+
+let plainread = fs.readFileSync(filename_plaintext);
+console.log(`${plainread}`);
+
+let keyread = fs.readFileSync(filename_key);
+console.log(`${keyread}`);
+
+
+  let plaintext = plainread;
+  let key1 = keyread;
+  let f = await importmodule.xorString(key1);                  // get generator function built on key
+  let o = await f(plaintext);                          // run it with plaintext
+  let cipertext = '';                            // get crypto values byte by byte
+  while (true) {
+    let y = o.next();
+    if (y.done) {
+        break;
+    }
+    cipertext += y.value;
+  }
+  console.log(`DART\nplain: '${plaintext}', length: ${plaintext.length}, crypto: '${cipertext}', length: ${cipertext.length}`);   // unprintables in cipertext
+
+  f = await importmodule.xorString(key1);               // build generator function on key
+  o = await f(cipertext);                              // run it with cryptotext
+  let plaintextoutcome = '';
+  while (true) {
+    let y = o.next();
+    if (y.done) {
+        break;
+    }
+   plaintextoutcome += y.value;
+  }
+console.log(`DART\ncrypto: '${cipertext}', length: ${cipertext.length}, plain: '$ plaintextoutcome}', length: $ plaintextoutcome.length}`);   // unprintables in cipertext
+}
+
+
+
+
 

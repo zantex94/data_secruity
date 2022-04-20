@@ -1,10 +1,11 @@
 
 // program to generate random strings
 
-let characters ='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+let characters ="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
+module.exports = {
 
-export function createKeys (length) {
+createKeys (length) {
     let result = '';
     let charactersLength = characters.length;
     for (let i = 0; i < length; i++ ) {
@@ -12,6 +13,15 @@ export function createKeys (length) {
     }
 
     return result;
+},
+async xorString(init) {
+    const initArr = Array.from(init);
+    const initLength = initArr.length;
+    return function* (input) {
+        let idx = 0;
+        for (const ch of input) {
+            yield initLength === 0 ? ch : String.fromCharCode(ch.charCodeAt(0) ^ initArr[(idx++) % initLength].charCodeAt(0));
+        }
+    }
+  }
 }
-
-console.log(createKeys(200));
