@@ -19,8 +19,6 @@ one_time_pads();
   fs.writeFileSync(filename_key,key, 'utf-8');
   // console.log(`${writesync}`);
 
-
-
 let plainread = fs.readFileSync(filename_plaintext, 'utf-8');
 console.log(`${plainread}`);
 
